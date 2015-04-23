@@ -21,6 +21,8 @@
 ::                1.0.0   Initial write
 SETLOCAL
 
+::Check if script ran previously if so end script::
+IF EXIST "%temp%\javaupdate\JAVA8451_Installed.txt" GOTO :END
 
 :::::::::::::::
 :: VARIABLES :: ---- Set these to your desired values. The defaults should work fine though ------ ::
@@ -477,6 +479,10 @@ echo %CUR_DATE% %TIME%   Log file: "%LOGPATH%\%LOGFILE%">> "%LOGPATH%\%LOGFILE%"
 echo %CUR_DATE% %TIME%   Log file: "%LOGPATH%\%LOGFILE%"
 echo %CUR_DATE% %TIME%   JAVA NUKER COMPLETE. Recommend rebooting and washing your hands.>> "%LOGPATH%\%LOGFILE%"
 echo %CUR_DATE% %TIME%   JAVA NUKER COMPLETE. Recommend rebooting and washing your hands.
+
+::Create File When this Script Completes
+Echo Done >>"%temp%\javaupdate\JAVA8451_Installed.txt"
+:END
 
 :: Return exit code to SCCM/PDQ Deploy/PSexec/etc
 exit /B %EXIT_CODE%
